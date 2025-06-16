@@ -1,5 +1,19 @@
-streamlit==1.28.0
-elasticsearch==8.4.3
-openai==1.3.0
+# Core web framework
+streamlit==1.32.0
+
+# HTTP client dependencies - these versions are compatible
+httpx==0.24.1
 requests==2.31.0
-python-dotenv==1.0.0
+
+# OpenAI API client - must be compatible with httpx==0.24.1
+openai==1.3.8
+
+# Search engine client
+elasticsearch==8.12.0
+
+# Environment configuration
+python-dotenv==1.0.1
+
+# Additional explicit dependencies to prevent conflicts
+urllib3>=1.26.0,<2.0.0
+certifi>=2023.7.22

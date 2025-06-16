@@ -20,16 +20,22 @@ cd course-faq-chatbot
 
 ### 2. Configure Environment
 ```bash
-# Copy the environment file
-cp .env.example .env
-
 # Edit .env and add your OpenAI API key
 nano .env
+
+pyenv install 3.11.13
+pyenv virtualenv 3.11.13 llm-course
+pyenv activate llm-course
+pyenv versions
+
+pip install -r requirements.txt
+
 ```
 
 ### 3. Run the Application
 ```bash
 # Start all services
+
 docker-compose up
 
 # Or run in background
