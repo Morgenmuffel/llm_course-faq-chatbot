@@ -1,7 +1,3 @@
-# llm_course-faq-chatbot
-# ===================================
-# FILE: README.md
-# ===================================
 # 🤖 Course FAQ Chatbot
 
 A beautiful, local RAG-powered chatbot that answers questions about course materials using Elasticsearch and OpenAI.
