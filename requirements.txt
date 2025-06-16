@@ -1,19 +1,22 @@
 # Core web framework
 streamlit==1.32.0
 
-# HTTP client dependencies - these versions are compatible
+# HTTP client dependencies - using older stable versions to avoid proxies error
 httpx==0.24.1
 requests==2.31.0
 
-# OpenAI API client - must be compatible with httpx==0.24.1
-openai==1.3.8
+# OpenAI API client - using newer version that supports httpx 0.24.1 properly
+openai==1.12.0
 
-# Search engine client
-elasticsearch==8.12.0
+# Search engine client - stable version
+elasticsearch==8.11.0
 
 # Environment configuration
 python-dotenv==1.0.1
 
-# Additional explicit dependencies to prevent conflicts
+# Explicit dependencies to lock transitive packages
 urllib3>=1.26.0,<2.0.0
 certifi>=2023.7.22
+httpcore>=0.17.0,<0.19.0
+anyio>=3.5.0,<5.0.0
+sniffio>=1.1.0

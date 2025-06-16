@@ -69,15 +69,14 @@ def main():
     # Sidebar
     with st.sidebar:
         st.markdown(f"""
-        <div class="sidebar-content">
+        
             <h3>🔧 System Status</h3>
             <p><span class="status-indicator {'status-online' if is_healthy else 'status-offline'}"></span>System: {health_message}</p>
-        </div>
+
         """, unsafe_allow_html=True)
 
-        st.markdown('<div class="sidebar-content">', unsafe_allow_html=True)
+ 
         st.markdown("### 📚 Course Selection")
-        st.markdown('</div>', unsafe_allow_html=True)
 
         courses = rag_system.get_courses() if is_healthy else []
 
@@ -90,24 +89,11 @@ def main():
 
         course_filter = None if selected_course == "All Courses" else selected_course
 
-        # Course info
-        if courses:
-            st.markdown(f"""
-            <div class="sidebar-content">
-                <strong>Available Courses:</strong> {len(courses)}
-            </div>
-            """, unsafe_allow_html=True)
-            with st.expander("View all courses"):
-                for course in courses:
-                    st.write(f"• {course}")
-
     # Main content - system is ready
     if not is_healthy:
         st.error("⚠️ System not ready. Please check the status in the sidebar.")
         return
 
-    # Chat interface
-    st.markdown('<div class="chat-container">', unsafe_allow_html=True)
 
     # Initialize chat history
     if "messages" not in st.session_state:
@@ -122,24 +108,20 @@ def main():
         else:
             st.markdown(f'<div class="bot-message">🤖 {message["content"]}</div>', unsafe_allow_html=True)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Initialize input counter for clearing
+    if "input_counter" not in st.session_state:
+        st.session_state.input_counter = 0
 
-    # Chat input
-    col1, col2 = st.columns([4, 1])
+    # Chat input - sticky bottom (styling in styles.css)
+    user_input = st.text_input(
+        "Ask your question:",
+        placeholder="Type your question and press Enter...",
+        key=f"user_input_{st.session_state.input_counter}",
+        label_visibility="collapsed"
+    )
 
-    with col1:
-        user_input = st.text_input(
-            "Ask your question:",
-            placeholder="e.g., How do I run Kafka?",
-            key="user_input",
-            label_visibility="collapsed"
-        )
-
-    with col2:
-        send_button = st.button("Send 🚀", use_container_width=True)
-
-    # Process input
-    if send_button and user_input:
+    # Process input on Enter
+    if user_input and user_input.strip():
         # Add user message
         st.session_state.messages.append({"role": "user", "content": user_input})
 
@@ -148,13 +130,8 @@ def main():
             response = rag_system.ask(user_input, course_filter)
             st.session_state.messages.append({"role": "assistant", "content": response})
 
-        st.rerun()
-
-    # Clear chat button
-    if st.button("🗑️ Clear Chat"):
-        st.session_state.messages = []
-        welcome_msg = "👋 Hello! I'm your course assistant. Ask me anything about the courses!"
-        st.session_state.messages.append({"role": "assistant", "content": welcome_msg})
+        # Clear the input field by incrementing counter (forces new widget)
+        st.session_state.input_counter += 1
         st.rerun()
 
 if __name__ == "__main__":

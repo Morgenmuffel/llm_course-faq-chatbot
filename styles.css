@@ -29,23 +29,6 @@
     font-weight: 300;
 }
 
-.sidebar-content {
-    padding: 1rem;
-    background: rgba(45, 55, 72, 0.8);
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    backdrop-filter: blur(10px);
-}
-
-.chat-container {
-    background: rgba(26, 32, 44, 0.8);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(102, 126, 234, 0.2);
-}
-
 .user-message {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -83,6 +66,101 @@
 .status-offline {
     background: #f56565;
     box-shadow: 0 0 10px rgba(245, 101, 101, 0.5);
+}
+
+/* Sticky Bottom Input Field */
+.stTextInput {
+    position: fixed !important;
+    bottom: 20px !important;
+    z-index: 999 !important;
+}
+
+.stTextInput > div {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.stTextInput > div > div {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.stTextInput > div > div > input {
+    background: white !important;
+    border: 2px solid #667eea !important;
+    border-radius: 25px !important;
+    padding: 15px 20px !important;
+    font-size: 16px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    color: #333 !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: #4CAF50 !important;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3) !important;
+    outline: none !important;
+}
+
+/* Target the parent container of text input */
+.stTextInput > div[data-testid="stVerticalBlock"] {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Remove any white backgrounds from nested containers */
+.stTextInput div[data-baseweb="input"] {
+    background: transparent !important;
+    border: none !important;
+}
+
+.stTextInput div[data-baseweb="base-input"] {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Main content spacing to avoid overlap with sticky input */
+.main .block-container {
+    padding-bottom: 120px !important;
+    padding-top: 1rem !important;
+}
+
+/* Hide input label */
+.stTextInput label {
+    display: none !important;
+}
+
+/* Hide "Press Enter to apply" text */
+.stTextInput div[data-testid="InputInstructions"] {
+    display: none !important;
+}
+
+.stTextInput .input-instructions {
+    display: none !important;
+}
+
+/* Hide any instruction text */
+.stTextInput div[data-testid="stMarkdownContainer"] {
+    display: none !important;
+}
+
+.stTextInput .stMarkdown {
+    display: none !important;
+}
+
+/* Hide instruction text by content */
+.stTextInput div:contains("Press Enter to apply") {
+    display: none !important;
+}
+
+/* Remove unwanted lines and borders from all nested divs */
+.stTextInput div {
+    border: none !important;
 }
 
 #MainMenu {visibility: hidden;}

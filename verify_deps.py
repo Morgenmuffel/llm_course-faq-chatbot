@@ -13,8 +13,8 @@ EXPECTED_VERSIONS = {
     'streamlit': '1.32.0',
     'httpx': '0.24.1', 
     'requests': '2.31.0',
-    'openai': '1.3.8',
-    'elasticsearch': '8.12.0',
+    'openai': '1.12.0',
+    'elasticsearch': '8.11.0',
     'python-dotenv': '1.0.1'
 }
 
@@ -53,8 +53,8 @@ def verify_dependencies() -> bool:
     else:
         print("⚠️  Some dependencies have version conflicts!")
         print("\nTo fix, run:")
-        print("pip uninstall openai httpx")
-        print("pip install openai==1.3.8 httpx==0.24.1")
+        print("pip uninstall openai httpx httpcore elasticsearch")
+        print("pip install httpcore==0.18.0 httpx==0.24.1 openai==1.12.0 elasticsearch==8.11.0")
         return False
 
 def test_imports() -> bool:

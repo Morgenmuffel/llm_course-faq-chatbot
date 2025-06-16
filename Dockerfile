@@ -11,14 +11,23 @@ RUN apt-get update && apt-get upgrade -y && apt-get clean && rm -rf /var/lib/apt
 # Copy requirements first for better Docker layer caching
 COPY requirements.txt .
 
-# Clean pip installation to prevent version conflicts
+# Aggressive dependency cleanup and installation
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
-    # Remove any pre-installed conflicting packages
-    pip uninstall -y openai httpx || true && \
-    # Install dependencies with specific resolver and no-deps for problematic packages
-    pip install --no-cache-dir --force-reinstall -r requirements.txt && \
-    # Verify the correct versions are installed
-    pip show openai httpx
+    # Remove all potentially conflicting packages first
+    pip uninstall -y openai httpx httpcore elasticsearch urllib3 requests certifi anyio sniffio || true && \
+    # Clear pip cache completely
+    pip cache purge && \
+    # Install with no cache and specific order to prevent conflicts
+    pip install --no-cache-dir --no-deps urllib3==1.26.18 && \
+    pip install --no-cache-dir --no-deps certifi==2023.7.22 && \
+    pip install --no-cache-dir --no-deps sniffio==1.3.0 && \
+    pip install --no-cache-dir --no-deps anyio==4.2.0 && \
+    pip install --no-cache-dir --no-deps httpcore==0.18.0 && \
+    pip install --no-cache-dir --no-deps httpx==0.24.1 && \
+    # Install remaining packages with dependencies
+    pip install --no-cache-dir -r requirements.txt && \
+    # Verify critical package versions
+    pip show openai httpx httpcore | grep -E "^(Name|Version):"
 
 # Copy verification script and application code
 COPY verify_deps.py .
