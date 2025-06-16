@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.stApp {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+    font-family: 'Inter', sans-serif;
+}
+
+.main-header {
+    text-align: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.main-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    margin-top: 0.5rem;
+    font-weight: 300;
+}
+
+.sidebar-content {
+    padding: 1rem;
+    background: rgba(45, 55, 72, 0.8);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.chat-container {
+    background: rgba(26, 32, 44, 0.8);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.user-message {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 20px 20px 5px 20px;
+    margin: 0.5rem 0;
+    margin-left: 2rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.bot-message {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    color: #e2e8f0;
+    padding: 1rem 1.5rem;
+    border-radius: 20px 20px 20px 5px;
+    margin: 0.5rem 0;
+    margin-right: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #667eea;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-online {
+    background: #48bb78;
+    box-shadow: 0 0 10px rgba(72, 187, 120, 0.5);
+}
+
+.status-offline {
+    background: #f56565;
+    box-shadow: 0 0 10px rgba(245, 101, 101, 0.5);
+}
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
